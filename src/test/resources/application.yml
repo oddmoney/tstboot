@@ -1,0 +1,17 @@
+server:
+  port: 9020
+  tomcat:
+    uri-encoding: UTF-8
+spring: 
+  profiles:
+    active: local
+  config: 
+    activate: 
+      on-profile: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.99.137:3306/payown?serverTimezone=UTC
+    username: oddmoney
+    password: kd1217
+logging:
+  config: classpath:log4j2/log4j2-local.xml

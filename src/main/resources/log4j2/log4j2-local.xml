@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Properties>
+		<Property  name="log-name">application_bnd_pay</Property>
+		<Property  name="base-dir"><![CDATA[C:/dev/log/tstboot_pay/local]]></Property>
+		<Property  name="log-format"><![CDATA[[%d{HH:mm:ss.SSS}] %class [%mdc] [%-5level] %msg%n]]></Property>
+	</Properties>
+    <Appenders>
+	    <Console name="console" target="SYSTEM_OUT">
+	      <PatternLayout pattern="${log-format}" />
+	    </Console>
+	    <RollingFile name="file"
+			fileName="${base-dir}/${log-name}.log"
+			filePattern="${base-dir}/${log-name}.%d{yyyyMMdd}-%i.log">
+			<PatternLayout pattern="${log-format}" />
+			<Policies>
+		        <SizeBasedTriggeringPolicy size="10MB"/>
+                <TimeBasedTriggeringPolicy interval="1"/>
+			</Policies>
+			<DefaultRolloverStrategy max="20">
+				<Delete basePath="${base-dir}">
+					<IfFileName glob="*.log" />
+					<IfLastModified age="30d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>    
+    </Appenders>
+    <Loggers>
+        <!-- Application Loggers -->
+	    <logger name="kr.co.etoursoft"      level="DEBUG" additivity="false"><AppenderRef ref="console" /><AppenderRef ref="file" /></logger>
+        <!-- jdbc.sql Loggers -->
+        <Logger name="jdbc.connection"      level="ERROR" additivity="false"><AppenderRef ref="console" /><AppenderRef ref="file" /></Logger>
+        <Logger name="jdbc.audit"           level="ERROR" additivity="false"><AppenderRef ref="console" /><AppenderRef ref="file" /></Logger>
+        <Logger name="jdbc.sqlonly"         level="ERROR" additivity="false"><AppenderRef ref="console" /><AppenderRef ref="file" /></Logger>
+        <Logger name="jdbc.sqltiming"       level="INFO" additivity="false"><AppenderRef ref="console" /><AppenderRef ref="file" /></Logger>
+        <Logger name="jdbc.resultset"       level="ERROR" additivity="false"><AppenderRef ref="console" /><AppenderRef ref="file" /></Logger>
+        <Logger name="jdbc.resultsettable"  level="INFO" additivity="false"><AppenderRef ref="console" /><AppenderRef ref="file" /></Logger>
+        <Root level="DEBUG">
+        	<AppenderRef ref="console" />
+            <AppenderRef ref="file" />
+        </Root>
+    </Loggers>
+</Configuration>

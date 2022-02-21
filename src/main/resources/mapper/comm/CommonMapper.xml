@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.etoursoft.tstboot.pay.mapper.comm.CommonMapper">
+
+	<select id="selectApprovalNum" resultType="string">
+		SELECT /* kr.co.etoursoft.tstboot.pay.mapper.comm.CommonMapper.selectApprovalNum */
+			PAYOWN.SEQ_NEXTVAL('SQPAYCNT_CARDSTLAITMZT_REQUEST_SENO') AS REQUEST_SENO FROM DUAL
+	</select>
+
+</mapper>

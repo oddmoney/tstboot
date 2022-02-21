@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.etoursoft.tstboot.pay.mapper.paytype.PayTypeMapper">
+
+	<sql id="sqlHeaderPayType">
+		    A.PAY_TYPE_DETAIL_CD
+		    , A.PAY_TYPE_CD
+			, A.FRANCHISE_ID
+			, A.PAY_MEANS_CD
+			, A.CURRENCY_CD
+			, A.ORDER_NO
+			, A.CH_EXPOSURE_DIV_CD
+			, IFNULL(C.COMMONNESS_DETAIL_CD_NM, '') AS CH_EXPOSURE_DIV_NM
+			, A.PG_COMPANY_CD
+			, A.PAY_TYPE_NM
+			, A.USE_YN
+			, A.ONLINE_DIV_CD
+			, A.MNL_USE_YN
+			, A.MNL_ID
+			, A.NOTE_CONT
+			, A.APPROVAL_IMPROPRIETY_START_DT
+			, A.APPROVAL_IMPROPRIETY_END_DT
+			, A.CANC_IMPROPRIETY_START_DT
+			, A.CANC_IMPROPRIETY_END_DT
+			, A.EXCALC_INSPECTION_START_TM
+			, A.EXCALC_INSPECTION_END_TM
+			, A.REGPS_ID
+			, A.REG_DTTM
+			, A.CHGPS_ID
+			, A.CHG_DTTM
+			, A.CHG_CONT
+	</sql>
+
+	<sql id="sqlBodyPayType">
+		FROM  PAYOWN.TBPAYCOD_PAYTYPE A
+			LEFT OUTER JOIN IBECOM.TBCOMCOD_COMNDTLCD C 
+			ON C.COMMONNESS_CD = 'P112' AND C.COMMONNESS_DETAIL_CD = A.CH_EXPOSURE_DIV_CD 
+		<where>
+		<if test='payTypeCd !=null and payTypeCd != ""'>
+		   	 AND A.PAY_TYPE_CD = #{payTypeCd}
+		</if>
+		<if test='payTypeDetailCd !=null and payTypeDetailCd != ""'>
+		   	 AND A.PAY_TYPE_DETAIL_CD = #{payTypeDetailCd}
+		</if>
+		<if test='payMeansCd !=null and payMeansCd != ""'>
+		   	 AND A.PAY_MEANS_CD = #{payMeansCd}
+		</if>
+		<if test='franchiseId !=null and franchiseId != ""'>
+		   	 AND A.FRANCHISE_ID = #{franchiseId}
+		</if>
+		<if test='pgCompanyCd !=null and pgCompanyCd != ""'>
+		   	 AND A.PG_COMPANY_CD = #{pgCompanyCd}
+		</if>
+		<if test='chExposureDivCd !=null and chExposureDivCd != ""'>
+		   	 AND A.CH_EXPOSURE_DIV_CD = #{chExposureDivCd}
+		</if>
+        <if test='payTypeDetailCdList != null and payTypeDetailCdList.size != 0'>
+            AND A.PAY_TYPE_DETAIL_CD IN 
+            <foreach collection="payTypeDetailCdList" item="item" index="index" separator="," open="(" close=")">#{item}</foreach>
+        </if>
+		AND A.USE_YN = 'Y'
+		</where>
+	</sql>
+
+	<select id="selectPayType" resultType="camelmap" parameterType="camelmap">
+		SELECT /* kr.co.etoursoft.tstboot.pay.mapper.paytype.PayTypeMapper.selectPayType */
+		<include refid="sqlHeaderPayType"/>
+		<include refid="sqlBodyPayType"/>
+	</select>
+
+	<select id="selectPayTypeList" resultType="camelmap" parameterType="camelmap">
+		SELECT /* kr.co.etoursoft.tstboot.pay.mapper.paytype.PayTypeMapper.selectPayTypeList */
+		<include refid="sqlHeaderPayType"/>
+		<include refid="sqlBodyPayType"/>
+		ORDER BY A.PAY_TYPE_CD
+			, A.CH_EXPOSURE_DIV_CD
+	</select>
+
+</mapper>

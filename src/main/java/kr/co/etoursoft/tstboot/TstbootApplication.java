@@ -56,6 +56,7 @@ class TstbootApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TstbootApplication.class, args);
+		
 	}
 
 }

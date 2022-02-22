@@ -1,0 +1,36 @@
+server:
+  port: 9020
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+#  profiles:
+#    active: dev
+  config: 
+    activate: 
+      on-profile: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #pc-lan-db
+    #url: jdbc:mysql://192.168.99.137:3306/payown?serverTimezone=UTC
+    #raspberry-wifi-db
+    url: jdbc:mysql://192.168.100.102:3306/PAYOWN?serverTimezone=UTC
+    username: oddmoney
+    password: 1217
+logging:
+  config: classpath:log4j2/log4j2-dev.xml
+management:  
+  endpoints:
+    web:
+      #base-path (Default) : /actuator
+      base-path: /healthcheck
+      cors: 
+        #allowed-origins: "https://test.com"
+        allowed-origins: "*"
+        allowed-methods: "GET,POST"
+      exposure: 
+        include: "health,customEndpoint"
+  endpoint:
+    health:
+      enabled: true
+      #show-details (Default) : never
+      show-details: always

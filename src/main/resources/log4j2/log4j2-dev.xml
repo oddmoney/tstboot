@@ -2,7 +2,7 @@
 <Configuration>
 	<Properties>
 		<Property  name="log-name">application_bnd_pay</Property>
-		<Property  name="base-dir"><![CDATA[/efs_log/tstboot_pay/dev]]></Property>
+		<Property  name="base-dir"><![CDATA[/dev/logs/tstboot/dev]]></Property>
 		<Property  name="log-format"><![CDATA[[%d{HH:mm:ss.SSS}] %class [%mdc] [%-5level] %msg%n]]></Property>
 	</Properties>
     <Appenders>

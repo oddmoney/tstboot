@@ -1,0 +1,15 @@
+1. Application Run
+프로젝트 우클릭 > Run As > Run Configurations
+> Spring Boot App 우클릭 > New Configuration 
+> Spring Boot 탭 
+: Project 선택 및 Main type 에 클래스 선택
+: Profile 란에 local 입력 후 Run
+
+2. JUnit Test Run
+프로젝트 우클릭 > Run As > Run Configurations
+> JUnit 우클릭 > New Configuration
+> Test 탭 
+: Project 및 Test class 선택
+> Arguments 탭
+: VM arguments 란에 '-Dspring.profiles.active=local' 추가
+: EX) -ea -Dspring.profiles.active=local

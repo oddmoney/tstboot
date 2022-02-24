@@ -11,9 +11,9 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     #pc-lan-db
-    #url: jdbc:mysql://192.168.99.137:3306/payown?serverTimezone=UTC
+    url: jdbc:mysql://192.168.99.137:3306/payown?serverTimezone=UTC
     #raspberry-wifi-db
-    url: jdbc:mysql://192.168.100.102:3306/PAYOWN?serverTimezone=UTC
+    #url: jdbc:mysql://192.168.100.102:3306/PAYOWN?serverTimezone=UTC
     username: oddmoney
     password: 1217
 logging:
